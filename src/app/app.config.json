@@ -1,6 +1,6 @@
 {
   "appname": "InnovativeSolutionBuyerApp2",
-  "ocscope": "FullAccess CategoryReader AddressAdmin OrderReader MeAdmin MeCreditCardAdmin",
+  "ocscope": "FullAccess CategoryReader AddressAdmin OrderReader MeAdmin",
   "clientid": "51484698-5A84-4796-806F-69476A161207",
   "buyerid": "VendorA",
   "environment": "prod",
