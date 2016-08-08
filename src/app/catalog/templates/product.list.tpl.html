@@ -6,7 +6,7 @@
         <div class="col-md-3" ng-repeat="product in productlist">
             <div class="product-item" ui-sref="catalog.product({productid: product.ID})">
                 <h3 class="item-name">{{product.Name || product.ID}}</h3>
-                <p class="item-id" ng-if="product.Name">{{product.ID}}</p>
+                <p class="item-id" ng-if="product.Name">{{product.ID}} </p>
                 <div class="thumbnail-image">
                     <span class="fa-stack fa-5x" ng-if="!product.xp.image">
                         <i class="fa fa-camera fa-stack-1x"></i>
@@ -16,7 +16,7 @@
                         <img class="img-responsive" ng-src="{{product.xp.image.URL}}" alt="Product Image">
                     </div>
                 </div>
-                <!--<div class="item-price"><p>{{product.StandardPriceSchedule.PriceBreaks[0].Price | currency}} x {{product.StandardPriceSchedule.PriceBreaks[0].Quantity}} </p></div>-->
+                <div class="item-price"><p>  {{product.StandardPriceSchedule.PriceBreaks[0].Price | currency}} x {{product.StandardPriceSchedule.PriceBreaks[0].Quantity}} </p></div>
                 <div class="item-description" ng-if="product.Description"><p>{{product.Description}}</p></div>
             </div>
         </div>
