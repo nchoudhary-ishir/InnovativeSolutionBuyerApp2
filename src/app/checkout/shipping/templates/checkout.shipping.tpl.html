@@ -30,111 +30,112 @@
             
         </div>
 
-        <div class="col-sm-12">
-            <div ng-show="!base.currentUser.FirstName ||  angular.isUndefined(base.currentUser.FirstName) || base.currentUser.FirstName === null">
-                <!--ng-show=" !base.currentuser.firstname"-->
-                <button ng-click="item = 1" type="button" ng-class="{active:item == 1}" class="btn btn-primary">Register</button>
-                <button ng-click="item = 2" type="button" ng-class="{active:item == 2}" class="btn btn-primary">Login</button>
+
+    </div>
+</div>
+<div class="col-sm-12">
+    <div ng-show="!base.currentUser.FirstName ||  angular.isUndefined(base.currentUser.FirstName) || base.currentUser.FirstName === null">
+        <!--ng-show=" !base.currentuser.firstname"-->
+        <button ng-click="item = 1" type="button" ng-class="{active:item == 1}" class="btn btn-primary">Register</button>
+        <button ng-click="item = 2" type="button" ng-class="{active:item == 2}" class="btn btn-primary">Login</button>
+    </div>
+    <div class="col-sm-6" ng-show='item == 1'>
+        <h3 class="page-header">
+            <b>Registration</b>
+        </h3>
+        <form name="RegistrationForm" ng-submit="checkoutShipping.register()" novalidate>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="userIDInput">User ID</label>
+                    <input id="userIDInput" ordercloud-auto-id type="text" pattern="([A-Za-z0-9\-\_]+)" pattern-err-type="ID_Name" class="form-control" ng-model="checkoutShipping.user.ID" />
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="userNameInput">User Name</label>
+                    <input id="userNameInput" type="text" class="form-control" ng-model="checkoutShipping.user.Username" required />
+                </div>
             </div>
-            <div class="col-sm-6" ng-show='item == 1'>
-                <h3 class="page-header">
-                    <b>Registration</b>
-                </h3>
-                <form name="RegistrationForm" ng-submit="checkoutShipping.register()" novalidate>
-                    <div class="row">
-                        <div class="col-sm-6 form-group">
-                            <label for="userIDInput">User ID</label>
-                            <input id="userIDInput" ordercloud-auto-id type="text" pattern="([A-Za-z0-9\-\_]+)" pattern-err-type="ID_Name" class="form-control" ng-model="checkoutShipping.user.ID" />
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label for="userNameInput">User Name</label>
-                            <input id="userNameInput" type="text" class="form-control" ng-model="checkoutShipping.user.Username" required />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 form-group">
-                            <label for="userFirstNameInput">First Name</label>
-                            <input id="userFirstNameInput" type="text" class="form-control" ng-model="checkoutShipping.user.FirstName" required />
-                        </div>
-                        <div class="col-sm-6 form-group">
-                            <label for="userLastNameInput">Last Name</label>
-                            <input id="userLastNameInput" type="text" class="form-control" ng-model="checkoutShipping.user.LastName" required />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-6">
-                            <!-- TODO: make phonefield -->
-                            <label for="userPhoneNumberInput">Phone Number</label>
-                            <input id="userPhoneNumberInput" type="text" class="form-control" ng-model="checkoutShipping.user.Phone" />
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label for="userEmailAddressInput">Email Address</label>
-                            <input id="userEmailAddressInput" type="email" class="form-control" ng-model="checkoutShipping.user.Email" required />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 form-group">
-                            <label for="userPasswordInput">Password</label>
-                            <input id="userPasswordInput" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$" pattern-err-type="customPassword" class="form-control" ng-model="checkoutShipping.user.Password" confirmpassword="{{checkoutShipping.PasswordConfirm}}" required />
-                        </div>
-                        <div class="col-sm-6 form-group">
-                            <label for="userPasswordConfirmInput">Confirm Password</label>
-                            <input id="userPasswordConfirmInput" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$" pattern-err-type="customPassword" class="form-control" ng-model="checkoutShipping.PasswordConfirm" confirmpassword="{{checkoutShipping.user.Password}}" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary" ng-disabled="RegistrationForm.$invalid">Submit</button>
-                    </div>
-                </form>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="userFirstNameInput">First Name</label>
+                    <input id="userFirstNameInput" type="text" class="form-control" ng-model="checkoutShipping.user.FirstName" required />
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="userLastNameInput">Last Name</label>
+                    <input id="userLastNameInput" type="text" class="form-control" ng-model="checkoutShipping.user.LastName" required />
+                </div>
             </div>
-            <div class="col-sm-6" ng-show='item == 2'
-                 ng-switch="checkoutShipping.form">
-                <h3 class="page-header">
-                    <b>{{checkoutShipping.loginFormHeaders[checkoutShipping.form]}}</b>
-                </h3>
-                <form class="panel-body" name="LoginForm" ng-submit="checkoutShipping.login()" ng-switch-when="login">
-                    <div class="form-group">
-                        <label for="Username">Username</label>
-                        <input type="text" class="form-control" id="Username" ng-model="checkoutShipping.credentials.Username" ng-required="true" />
-                    </div>
-                    <div class="form-group">
-                        <label for="Password">Password</label>
-                        <input type="password" class="form-control" id="Password" ng-model="checkoutShipping.credentials.Password" ng-required="true" />
-                    </div>
-                    <button id="submit_login" type="submit" class="btn btn-primary" ng-disabled="LoginForm.$invalid">Submit</button>
-                    <a id="forgot_password" class="btn btn-link" ng-click="checkoutShipping.setForm('forgot')">Forgot Password?</a> <!--TODO: should this be functional in the Seed Project?-->
-                </form>
-                <form class="panel-body" name="ForgotPasswordForm" ng-submit="checkoutShipping.forgotPassword()" ng-switch-when="forgot">
-                    <div class="form-group">
-                        <label for="Email">Email</label>
-                        <input type="text" class="form-control" id="Email" ng-model="checkoutShipping.credentials.Email" ng-required="true" />
-                    </div>
-                    <button type="submit" id="email_submit" class="btn btn-primary" ng-disabled="ForgotPasswordForm.$invalid">Submit</button>
-                    <a id="back_to_login" class="btn btn-link" ng-click="checkoutShipping.setForm('login')">Back to Login</a>
-                </form>
-                <form class="panel-body" name="ResetPasswordForm" ng-submit="checkoutShipping.resetPassword()" ng-switch-when="reset">
-                    <div class="form-group">
-                        <label for="ResetUsername">Username</label>
-                        <input type="text" class="form-control" id="ResetUsername" ng-model="checkoutShipping.credentials.ResetUsername" ng-required="true" />
-                    </div>
-                    <div class="form-group">
-                        <label for="NewPassword">New Password</label>
-                        <input type="password" class="form-control" id="NewPassword" ng-model="checkoutShipping.credentials.NewPassword" ng-required="true" />
-                    </div>
-                    <div class="form-group">
-                        <label for="ConfirmPassword">Confirm Password</label>
-                        <input type="password" class="form-control" id="ConfirmPassword" ng-model="checkoutShipping.credentials.ConfirmPassword" ng-required="true" />
-                    </div>
-                    <button type="submit" id="reset_submit" class="btn btn-primary" ng-disabled="ResetPasswordForm.$invalid || checkoutShipping.credentials.NewPassword != checkoutShipping.credentials.ConfirmPassword">Submit</button>
-                </form>
-                <form class="panel-body" name="VerificationCodeSuccessForm" ng-switch-when="verificationCodeSuccess">
-                    <div class="alert alert-info" id="forgot_message">Forgot Password email has been sent. Please check your email in order to reset your password.</div>
-                </form>
-                <form class="panel-body" name="ResetSuccessForm" ng-switch-when="resetSuccess">
-                    <div class="alert alert-info">Your password has been reset.</div>
-                    <a class="btn btn-link" id="back_to_login2" ng-click="checkoutShipping.setForm('login')">Back to Login</a>
-                </form>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <!-- TODO: make phonefield -->
+                    <label for="userPhoneNumberInput">Phone Number</label>
+                    <input id="userPhoneNumberInput" type="text" class="form-control" ng-model="checkoutShipping.user.Phone" />
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="userEmailAddressInput">Email Address</label>
+                    <input id="userEmailAddressInput" type="email" class="form-control" ng-model="checkoutShipping.user.Email" required />
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <label for="userPasswordInput">Password</label>
+                    <input id="userPasswordInput" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#ï¿½ï¿½*?&]{8,}$" pattern-err-type="customPassword" class="form-control" ng-model="checkoutShipping.user.Password" confirmpassword="{{checkoutShipping.PasswordConfirm}}" required />
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="userPasswordConfirmInput">Confirm Password</label>
+                    <input id="userPasswordConfirmInput" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#ï¿½ï¿½*?&]{8,}$" pattern-err-type="customPassword" class="form-control" ng-model="checkoutShipping.PasswordConfirm" confirmpassword="{{checkoutShipping.user.Password}}" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" ng-disabled="RegistrationForm.$invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-6" ng-show='item == 2'
+         ng-switch="checkoutShipping.form">
+        <h3 class="page-header">
+            <b>{{checkoutShipping.loginFormHeaders[checkoutShipping.form]}}</b>
+        </h3>
+        <form class="panel-body" name="LoginForm" ng-submit="checkoutShipping.login()" ng-switch-when="login">
+            <div class="form-group">
+                <label for="Username">Username</label>
+                <input type="text" class="form-control" id="Username" ng-model="checkoutShipping.credentials.Username" ng-required="true" />
+            </div>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="password" class="form-control" id="Password" ng-model="checkoutShipping.credentials.Password" ng-required="true" />
+            </div>
+            <button id="submit_login" type="submit" class="btn btn-primary" ng-disabled="LoginForm.$invalid">Submit</button>
+            <a id="forgot_password" class="btn btn-link" ng-click="checkoutShipping.setForm('forgot')">Forgot Password?</a> <!--TODO: should this be functional in the Seed Project?-->
+        </form>
+        <form class="panel-body" name="ForgotPasswordForm" ng-submit="checkoutShipping.forgotPassword()" ng-switch-when="forgot">
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="text" class="form-control" id="Email" ng-model="checkoutShipping.credentials.Email" ng-required="true" />
+            </div>
+            <button type="submit" id="email_submit" class="btn btn-primary" ng-disabled="ForgotPasswordForm.$invalid">Submit</button>
+            <a id="back_to_login" class="btn btn-link" ng-click="checkoutShipping.setForm('login')">Back to Login</a>
+        </form>
+        <form class="panel-body" name="ResetPasswordForm" ng-submit="checkoutShipping.resetPassword()" ng-switch-when="reset">
+            <div class="form-group">
+                <label for="ResetUsername">Username</label>
+                <input type="text" class="form-control" id="ResetUsername" ng-model="checkoutShipping.credentials.ResetUsername" ng-required="true" />
+            </div>
+            <div class="form-group">
+                <label for="NewPassword">New Password</label>
+                <input type="password" class="form-control" id="NewPassword" ng-model="checkoutShipping.credentials.NewPassword" ng-required="true" />
+            </div>
+            <div class="form-group">
+                <label for="ConfirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="ConfirmPassword" ng-model="checkoutShipping.credentials.ConfirmPassword" ng-required="true" />
+            </div>
+            <button type="submit" id="reset_submit" class="btn btn-primary" ng-disabled="ResetPasswordForm.$invalid || checkoutShipping.credentials.NewPassword != checkoutShipping.credentials.ConfirmPassword">Submit</button>
+        </form>
+        <form class="panel-body" name="VerificationCodeSuccessForm" ng-switch-when="verificationCodeSuccess">
+            <div class="alert alert-info" id="forgot_message">Forgot Password email has been sent. Please check your email in order to reset your password.</div>
+        </form>
+        <form class="panel-body" name="ResetSuccessForm" ng-switch-when="resetSuccess">
+            <div class="alert alert-info">Your password has been reset.</div>
+            <a class="btn btn-link" id="back_to_login2" ng-click="checkoutShipping.setForm('login')">Back to Login</a>
+        </form>
     </div>
 </div>
