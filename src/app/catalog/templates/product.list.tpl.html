@@ -16,9 +16,9 @@
                         <img class="img-responsive" ng-src="{{product.xp.image.URL}}" alt="Product Image">
                     </div>
                 </div>
-<div ng-show="product.ID==='WaterProofBanadages'">
-                <div class="item-price"><p>  {{product.StandardPriceSchedule.PriceBreaks[0].Price | currency}} x {{product.StandardPriceSchedule.PriceBreaks[0].Quantity}} </p></div>
-</div>
+
+                <div class="item-price" ng-show="product.xp.visible"><p>  {{product.StandardPriceSchedule.PriceBreaks[0].Price | currency}} x {{product.StandardPriceSchedule.PriceBreaks[0].Quantity}} </p></div>
+
                 <div class="item-description" ng-if="product.Description"><p>{{product.Description}}</p></div>
             </div>
         </div>
