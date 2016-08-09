@@ -31,7 +31,8 @@
         </div>
 
         <div class="col-sm-12">
-            <div ng-show="!base.currentUser.FirstName">
+            <div ng-show="!base.currentUser.FirstName ||  angular.isUndefined(base.currentUser.FirstName) || base.currentUser.FirstName === null">
+                <!--ng-show=" !base.currentuser.firstname"-->
                 <button ng-click="item = 1" type="button" ng-class="{active:item == 1}" class="btn btn-primary">Register</button>
                 <button ng-click="item = 2" type="button" ng-class="{active:item == 2}" class="btn btn-primary">Login</button>
             </div>
