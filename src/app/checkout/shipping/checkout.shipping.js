@@ -10,12 +10,14 @@ function checkoutShippingConfig($stateProvider) {
 			url: '/shipping',
 			templateUrl: 'checkout/shipping/templates/checkout.shipping.tpl.html',
 			controller: 'CheckoutShippingCtrl',
-			controllerAs: 'checkoutShipping'
+			controllerAs: 'checkoutShipping',
+			data: { componentName: 'Registration' }
 		})
     ;
 }
 
-function CheckoutShippingController($state, $rootScope, OrderCloud, OrderShippingAddress) {
+//function CheckoutShippingController($state,$stateParams, $rootScope, OrderCloud, OrderShippingAddress) {
+function CheckoutShippingController($state, $stateParams, $rootScope, OrderCloud, OrderShippingAddress, $exceptionHandler, toastr, LoginService) {
 	var vm = this;
     vm.saveAddress = null;
     vm.isAlsoBilling = null;
@@ -24,6 +26,83 @@ function CheckoutShippingController($state, $rootScope, OrderCloud, OrderShippin
     vm.SaveCustomAddress = saveCustomAddress;
     vm.customShipping = false;
     vm.shippingAddress = null;
+    //.............Added by Ankit
+    vm.user = { Active: true };
+    vm.credentials = {
+        Username: null,
+        Password: null
+    };
+    vm.token = $stateParams.token;
+    vm.form = vm.token ? 'reset' : 'login';
+    vm.loginFormHeaders = {
+        'login': 'Login',
+        'forgot': 'Forgot Password',
+        'verificationCodeSuccess': 'Forgot Password',
+        'reset': 'Reset Password',
+        'resetSuccess': 'Reset Password'
+    };
+    vm.setForm = function (form) {
+        vm.form = form;
+    };
+    vm.register = function () {
+        debugger;
+        vm.user.TermsAccepted = new Date();
+        OrderCloud.Me.CreateFromTempUser(vm.user, OrderCloud.Auth.ReadToken())
+            .then(function (token) {
+                OrderCloud.Auth.SetToken(token.access_token);
+                $state.go('checkout.shipping', {}, { reload: true });
+                toastr.success('Registration Successful', 'Success');
+            })
+            .catch(function (ex) {
+                $exceptionHandler(ex)
+            });
+    };
+    vm.login = function () {
+        var tempUserToken = angular.copy(OrderCloud.Auth.ReadToken());
+        OrderCloud.Auth.GetToken(vm.credentials)
+            .then(function (data) {
+                OrderCloud.Auth.SetToken(data['access_token']);
+                OrderCloud.Orders.TransferTempUserOrder(tempUserToken)
+                    .then(function (data) {
+                        console.log(data);
+                    })
+                    .finally(function () {
+                        $state.go('checkout.shipping', {}, { reload: true });
+                    });
+            })
+            .catch(function (ex) {
+                $exceptionHandler(ex);
+            });
+    };
+
+    vm.forgotPassword = function () {
+        LoginService.SendVerificationCode(vm.credentials.Email)
+            .then(function () {
+                vm.setForm('verificationCodeSuccess');
+                vm.credentials.Email = null;
+            })
+            .catch(function (ex) {
+                $exceptionHandler(ex);
+            });
+    };
+
+    vm.resetPassword = function () {
+        LoginService.ResetPassword(vm.credentials, vm.token)
+            .then(function () {
+                vm.setForm('resetSuccess');
+                vm.token = null;
+                vm.credentials.ResetUsername = null;
+                vm.credentials.NewPassword = null;
+                vm.credentials.ConfirmPassword = null;
+            })
+            .catch(function (ex) {
+                $exceptionHandler(ex);
+                vm.credentials.ResetUsername = null;
+                vm.credentials.NewPassword = null;
+                vm.credentials.ConfirmPassword = null;
+            });
+    };
+    //............
 
     function saveShipAddress(order) {
         if (order && order.ShippingAddressID) {
@@ -112,3 +191,4 @@ function OrderShippingAddressFactory($q, $localForage, OrderCloud, appname) {
         $localForage.removeItem(StorageName);
     }
 }
+
