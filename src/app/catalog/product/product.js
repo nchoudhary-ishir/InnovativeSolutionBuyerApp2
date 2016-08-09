@@ -171,6 +171,11 @@ function ProductController(Product, SpecList, Order, AddToOrder) {
     vm.addToCart = function(product) {
         AddToOrder.Add(product);
     };
+    vm.sendEnquiry=function()
+    {
+        alert("ddd");
+
+    }
 }
 
 function LineItemEditController($state, Underscore, OrderCloud, LineItemHelpers, LineItem, LI_Product, LI_SpecList) {
