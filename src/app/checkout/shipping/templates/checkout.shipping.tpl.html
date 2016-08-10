@@ -32,6 +32,7 @@
 
         <div class="col-sm-12">
             <div ng-show="!base.currentUser.FirstName ||  angular.isUndefined(base.currentUser.FirstName) || base.currentUser.FirstName === null">
+                <!--<div ng-show="base.currentUser.Anonymous">-->
                 <!--ng-show=" !base.currentuser.firstname"-->
                 <button ng-click="item = 1" type="button" ng-class="{active:item == 1}" class="btn btn-primary">Register</button>
                 <button ng-click="item = 2" type="button" ng-class="{active:item == 2}" class="btn btn-primary">Login</button>
@@ -75,11 +76,11 @@
                     <div class="row">
                         <div class="col-sm-6 form-group">
                             <label for="userPasswordInput">Password</label>
-                            <input id="userPasswordInput" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$" pattern-err-type="customPassword" class="form-control" ng-model="checkoutShipping.user.Password" confirmpassword="{{checkoutShipping.PasswordConfirm}}" required />
+                            <input id="userPasswordInput" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#ï¿½ï¿½*?&]{8,}$" pattern-err-type="customPassword" class="form-control" ng-model="checkoutShipping.user.Password" confirmpassword="{{checkoutShipping.PasswordConfirm}}" required />
                         </div>
                         <div class="col-sm-6 form-group">
                             <label for="userPasswordConfirmInput">Confirm Password</label>
-                            <input id="userPasswordConfirmInput" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$" pattern-err-type="customPassword" class="form-control" ng-model="checkoutShipping.PasswordConfirm" confirmpassword="{{checkoutShipping.user.Password}}" required />
+                            <input id="userPasswordConfirmInput" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#ï¿½ï¿½*?&]{8,}$" pattern-err-type="customPassword" class="form-control" ng-model="checkoutShipping.PasswordConfirm" confirmpassword="{{checkoutShipping.user.Password}}" required />
                         </div>
                     </div>
                     <div class="form-group">
