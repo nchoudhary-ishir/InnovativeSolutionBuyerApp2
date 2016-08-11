@@ -16,11 +16,10 @@ function BaseConfig($stateProvider, $injector) {
     if ($injector.has('base')) {
         var baseConfig = $injector.get('base');
 
-        // to remove the left section commented by naresh
         //conditional base left
-        // baseConfig.left ? baseViews['left@base'] = {
-        //     'templateUrl': 'base/templates/base.left.tpl.html'
-        // } : angular.noop();
+        baseConfig.left ? baseViews['left@base'] = {
+            'templateUrl': 'base/templates/base.left.tpl.html'
+        } : angular.noop();
 
         //conditional base right
         baseConfig.right ? baseViews['right@base'] = {
@@ -110,7 +109,7 @@ function BaseConfig($stateProvider, $injector) {
 
 function BaseController($rootScope, $ocMedia, Underscore, snapRemote, defaultErrorMessageResolver, CurrentUser, ComponentList, base) {
     var vm = this;
-    // vm.left = base.left;
+    vm.left = base.left;
     vm.right = base.right;
     vm.currentUser = CurrentUser;
     vm.catalogItems = ComponentList.nonSpecific;

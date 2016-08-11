@@ -8,27 +8,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            <!--Will hide the app name commented by Naresh  -->
             <!--<a class="navbar-brand" href="" ui-sref="home">{{application.name}}</a>-->
         </div>
-            <!--<h4 class="text-primary"><b>Buyer Company</b></h4>-->
-            <!--Will hide the buyer link -->
-            <!--<ordercloud-select-buyer></ordercloud-select-buyer>-->
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="BASE_TOP_COLLAPSE">
-                  <ul class="nav navbar-nav navbar-default">
-                <li role="presentation" ui-sref-active="active">
-                    <a href="" ui-sref="home"><i class="fa fa-home"></i> Home</a>
-                </li>
-                <li role="presentation" ng-repeat="item in base.organizationItems | occomponents | orderBy:'Display'" ui-sref-active="active">
-                    <a href="" ui-sref="{{item.StateRef}}">{{item.Display}}</a>
-                    <div ng-if="item.Display == 'Catalog' && application.$state.includes('catalog')">
-                        <catalog-tree></catalog-tree>
-                        <ordercloud-catalog-facets></ordercloud-catalog-facets>
-                    </div>
-                </li>
-        <!--Hides register user login commented by naresh-->
+            <ul class="nav navbar-nav navbar-right">
                 <li uib-dropdown ng-if="!base.currentUser.Anonymous">
                     <a href="#" uib-dropdown-toggle role="button"><i class="fa fa-user"></i> Account <span class="caret"></span></a>
                     <ul uib-dropdown-menu>
@@ -44,7 +29,6 @@
                 <li>
                     <ordercloud-minicart order="catalog.currentOrder"></ordercloud-minicart>
                 </li>
-
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
