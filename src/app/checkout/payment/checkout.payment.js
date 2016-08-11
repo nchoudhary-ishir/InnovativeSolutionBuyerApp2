@@ -14,19 +14,20 @@ function checkoutPaymentConfig($stateProvider) {
 			controller: 'CheckoutPaymentCtrl',
 			controllerAs: 'checkoutPayment',
 			resolve: {
-                AvailableCreditCards: function(OrderCloud) {
+                AvailableCreditCards: function (OrderCloud) {
                     return OrderCloud.Me.ListCreditCards();
-                },
-                AvailableSpendingAccounts: function(OrderCloud) {
-                    // TODO: Needs to be refactored to work with Me Service
-                    return OrderCloud.SpendingAccounts.List(null, null, null, null, null, {'RedemptionCode': '!*'});
+                    // },
+                    // AvailableSpendingAccounts: function(OrderCloud) {
+                    //     // TODO: Needs to be refactored to work with Me Service
+                    //     return OrderCloud.SpendingAccounts.List(null, null, null, null, null, {'RedemptionCode': '!*'});
+                    // }
                 }
-			}
+            }
 		})
     ;
 }
 
-function CheckoutPaymentController($state, Underscore, toastr, OrderCloud, AvailableCreditCards, AvailableSpendingAccounts, OrderPayments, allowMultiplePayments, creditCardExpirationDate) {
+function CheckoutPaymentController($state, Underscore, toastr, OrderCloud, AvailableCreditCards, OrderPayments, allowMultiplePayments, creditCardExpirationDate) {
 	var vm = this;
     vm.allowMultiplePayments = allowMultiplePayments;
     vm.currentOrderPayments = OrderPayments.Items;
@@ -44,7 +45,7 @@ function CheckoutPaymentController($state, Underscore, toastr, OrderCloud, Avail
     ];
     vm.today = new Date();
     vm.creditCards = AvailableCreditCards.Items;
-    vm.spendingAccounts = AvailableSpendingAccounts.Items;
+  //  vm.spendingAccounts = AvailableSpendingAccounts.Items;
     vm.months =['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
     vm.years = Underscore.range(vm.today.getFullYear(), vm.today.getFullYear() + 20, 1);
     vm.expireMonth = creditCardExpirationDate.expirationMonth;
